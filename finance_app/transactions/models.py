@@ -13,7 +13,7 @@ class Account(models.Model):
 # Model for Category
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-
+    description = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.name
 
@@ -32,17 +32,16 @@ class Transaction(models.Model):
         (4, 'Monthly'),
         (5, 'Yearly'),
     ]
-    account = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions')
+    account = models.ForeignKey(User, on_delete=models.CASCADE, related_name='transactions')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='transactions')
     amount = models.DecimalField(max_digits=19, decimal_places=4)
     transaction_date = models.DateTimeField()
-    description = models.TextField(blank=True, null=True)
     priority = models.IntegerField(choices=PRIORITY_CHOICES, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     frequency = models.IntegerField(choices=FREQUENCY_CHOICES, null=True, blank=True)
     
     def __str__(self):
-        return f"{self.description} - {self.amount}"
+        return f"{self.amount}"
 
 # Model for Investment
 class Investment(models.Model):

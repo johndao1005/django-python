@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from transactions.views import CategoryViewSet, TransactionViewSet, InvestmentViewSet, ForecastViewSet, AccountViewSet
+from transactions.views import CategoryViewSet, TransactionViewSet, InvestmentViewSet, ForecastViewSet, AccountViewSet, CSVUploadView
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
@@ -30,4 +30,5 @@ router.register(r'forecasts', ForecastViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('upload-csv/', CSVUploadView.as_view(), name='upload-csv'),
 ]
