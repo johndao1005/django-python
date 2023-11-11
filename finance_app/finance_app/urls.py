@@ -30,5 +30,6 @@ router.register(r'forecasts', ForecastViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
     path('upload-csv/', CSVUploadView.as_view(), name='upload-csv'),
 ]
