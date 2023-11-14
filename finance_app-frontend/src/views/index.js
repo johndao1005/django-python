@@ -9,7 +9,7 @@ import Dashboard from '@/views/Dashboard/Dashboard.vue';
 
 export default new createRouter({
   // mode: 'history',
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',

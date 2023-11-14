@@ -1,7 +1,6 @@
-
-<script>
+<script >
 import Navbar from './components/Navbar.vue'
-
+import 'ant-design-vue/dist/reset.css';
 export default {
   name: 'App',
   components: {
