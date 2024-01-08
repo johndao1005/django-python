@@ -1,6 +1,6 @@
 import React from "react";
 import { useRouteError } from "react-router-dom";
-import UserInterface from "./interfaces";
+import UserInterface from "../interfaces";
 
 const ErrorPage = () => {
     const error:any = useRouteError();

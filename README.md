@@ -37,3 +37,17 @@ py manage.py runserver
 ```
 
 # Database
+
+# Start
+
+## Backend
+
+1. Start virtual env
+    `django/Scripts/activate`
+2. Start the server
+    `cd backend`
+    `py manage.py runserver`
+3. 
+
+
+## Frontend

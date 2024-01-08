@@ -1,4 +1,4 @@
 export const app = {
-    name: 'drawer',
-    link: 'homeDrawer',
+    name: 'personal-money',
+    link: 'yourmoney.com',
   };
