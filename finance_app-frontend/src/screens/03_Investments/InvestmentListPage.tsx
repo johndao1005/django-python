@@ -1,57 +1,21 @@
-import React from "react";
-import { Form } from "react-router-dom";
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
+import { Flex, Radio } from 'antd';
 
+const baseStyle: React.CSSProperties = {
+  width: '25%',
+  height: 54,
+};
 
-interface contactType  {
-    first: string;
-    last: string;
-    avatar: any;
-    twitter: string;
-    notes: string;
-    favorite: true;
-}
-
-type childProps = {children? :React.ReactNode}
-
-export default function InvestmentListPage( {children}:childProps) {
+export default function InvestmentListPage  ()  {
+  const [value, setValue] = React.useState<string>('horizontal');
   return (
-    <>
-      <div id="sidebar">
-        <h1>React Router Contacts</h1>
-        <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
-          <form method="post">
-            <button type="submit">New</button>
-          </form>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href={`/contacts/1`}>Your Name</a>
-            </li>
-            <li>
-              <a href={`/contacts/2`}>Your Friend</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </>
+    
+      <Flex  >
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} style={{ ...baseStyle, backgroundColor: i % 2 ? '#1677ff' : '#1677ffbf' }} />
+        ))}
+    </Flex>
   );
-}
+};
+

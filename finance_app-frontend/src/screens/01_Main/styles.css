@@ -1,0 +1,49 @@
+.font {
+  color: #f00;
+  font-size: 20px;
+}
+
+/*ANCHOR Summary  */
+.welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+}
+
+.welcome div{
+  text-decoration: none;
+  padding: auto;
+  margin: 10px;
+}
+
+/*ANCHOR Transactions  */
+.footer {
+  width: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.footer a {
+  text-decoration: none;
+  padding: auto;
+  margin: 10px;
+}
+
+
+/*ANCHOR welcome  */
+.footer {
+  width: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.footer a {
+  text-decoration: none;
+  padding: auto;
+  margin: 10px;
+}
