@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Form } from "react-router-dom";
 import "./styles.css"
+import { Header } from "antd/es/layout/layout";
+import Sider from "antd/es/layout/Sider";
 
 interface contactType {
   first: string;

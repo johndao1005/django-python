@@ -7,28 +7,23 @@ import ErrorPage from "./00_ErrorPages/ErrorPage";
 import WelcomePage from "./00_Welcome/Welcome";
 import MainPage from "./01_Main/MainPage";
 import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
+import SiteFooter from "../components/Footer";
 import TransactionListPage from "./02_Transactions/TransactionListPage";
 import InvestmentListPage from "./03_Investments/InvestmentListPage";
+import { Layout } from "antd";
+import { Content } from "antd/es/layout/layout";
 
-const FunctionGroup = () =>{
-    
+/*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
+const FunctionGroup = () => {
+
     return (
-        <>
-            <NavBar/>
-            <Outlet />
-            <Footer/>
-        </>
-    )
-}
-
-
-const WelcomeGroup = () =>{
-    
-    return (
-        <>
-    
-        </>
+        <Layout>
+            <NavBar />
+            <Content>
+                <Outlet />
+            </Content>
+            <SiteFooter />
+        </Layout>
     )
 }
 
@@ -36,24 +31,24 @@ const router = createBrowserRouter([
     {
         path: "/",
         //element:<WelcomePage/>
-        element:<FunctionGroup /> ,
+        element: <FunctionGroup />,
         errorElement: <ErrorPage />,
-        children : [
+        children: [
             {
                 path: "",
-                element:<MainPage />
+                element: <MainPage />
             },
             {
                 path: "/transactions",
-                element: <TransactionListPage/>,
+                element: <TransactionListPage />,
             },
             {
                 path: "/investment",
-                element: <InvestmentListPage/>,
+                element: <InvestmentListPage />,
             },
         ]
     },
-  
+
 ]);
 
 
