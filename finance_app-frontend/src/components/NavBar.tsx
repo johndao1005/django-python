@@ -3,6 +3,7 @@ import { Link, useRouteError } from "react-router-dom";
 import './styles.css';
 import { inherits } from "util";
 import { Header } from "antd/es/layout/layout";
+import { navList } from "../constants/app";
 
 export default function NavBar() {
   const error: any = useRouteError();
@@ -13,10 +14,9 @@ export default function NavBar() {
       <Link to={`/`}>
         <img style={{ height: "50px" }} src="https://blog.hubspot.com/hs-fs/hubfs/image8-2.jpg?width=600&name=image8-2.jpg" />
       </Link>
-      <Link to={`/`}>Nav</Link>
-      <Link to={`/transactions`}>Transaction List</Link>
-      <Link to={`/investment`}>Investment</Link>
-      <Link to={`/transactions`}>Transaction List</Link>
+      {navList.map((route, i) => (
+        <Link  key={i} to={route.route}>{route.title}</Link>)
+      )}
     </Header>
   );
 }
