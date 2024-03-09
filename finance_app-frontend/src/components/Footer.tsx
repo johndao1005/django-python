@@ -10,10 +10,14 @@ export default function SiteFooter() {
 
   return (
     <Footer className="footer">
-      <div style={{paddingTop:10}}>@ 2024 FIREDay All rights reserved</div>
+      <div style={{ paddingTop: 10 }}>@ 2024 FIREDay All rights reserved</div>
       {navList.map((route, i) => (
-        <Link  key={i} to={route.route}>{route.title}</Link>)
+        <Link key={i} to={route.route}>{route.title}</Link>)
       )}
+
+      <div>
+
+      </div>
     </Footer>
   );
 }
