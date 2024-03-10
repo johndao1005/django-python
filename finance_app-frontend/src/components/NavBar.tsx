@@ -10,7 +10,7 @@ export default function NavBar() {
   console.error(error);
 
   return (
-    <Header hasSider={true} className="navbar">
+    <Header  className="navbar">
       <Link to={`/`}>
         <img style={{ height: "50px" }} src="https://blog.hubspot.com/hs-fs/hubfs/image8-2.jpg?width=600&name=image8-2.jpg" />
       </Link>
