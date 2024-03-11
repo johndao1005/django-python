@@ -38,6 +38,7 @@ export default function MainPage({ children }: childProps) {
   const [transactionList, setTransactionList] = useState<TransactionsData[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Get transaction details
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/accounts/')
       .then(response => {
