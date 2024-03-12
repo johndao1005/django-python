@@ -5,7 +5,7 @@ import { Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import { Avatar, Flex, Image, List, Skeleton } from "antd";
 import axios from "axios";
-
+import { AppAPIList } from "../../constants/app";
 
 interface contactType {
   first: string;
@@ -18,30 +18,28 @@ interface contactType {
 
 type childProps = { children?: React.ReactNode }
 interface TransactionsData {
-  gender?: string;
-  name: {
-    title?: string;
-    first?: string;
-    last?: string;
-  };
-  email?: string;
-  picture: {
-    large?: string;
-    medium?: string;
-    thumbnail?: string;
-  };
-  nat?: string;
-  loading: boolean;
+  id: number;
+  amount: string;
+  transaction_date: Date;
+  frequency: number;
+  priority: number;
+  comment: string;
+  created_at: Date;
+  modified_at: Date;
+  user: number;
+  category: number;
 }
 
 export default function MainPage({ children }: childProps) {
-  const [transactionList, setTransactionList] = useState<TransactionsData[]>([]);
+  const [transactionList, setTransactionList] = useState<null | TransactionsData[]>([]);
   const [loading, setLoading] = useState(false);
 
   // Get transaction details
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/accounts/')
-      .then(response => {
+    axios.get(AppAPIList.Transactions)
+      .then((response )=> {
+        let list : null | TransactionsData[] = response.data
+        setTransactionList(list)
         console.log(response)
       })
       .catch(error => {
@@ -58,9 +56,6 @@ export default function MainPage({ children }: childProps) {
       asset: 12,
     }
 
-    useEffect(() => {
-      //use to get current financial data
-    })
     return (
       <Flex vertical gap="large" justify="space-around" className="welcome">
         <div style={{ "paddingBottom": "20%" }}>
@@ -95,9 +90,12 @@ export default function MainPage({ children }: childProps) {
 
   const RecentTransactions = () => {
     let count = 3
+    if(transactionList === null){
+      return <></>
+    }
     return (
       <>
-        <h1>Transaction</h1>
+        <h1>Transactions {transactionList?.length}</h1>
         <List
           className="demo-loadmore-list"
           loading={loading}
@@ -110,12 +108,8 @@ export default function MainPage({ children }: childProps) {
             >
               <Skeleton avatar title={false} //loading={item.loading} 
                 active>
-                <List.Item.Meta
-                  avatar={<Avatar src={item.picture.large} />}
-                  title={<a href="https://ant.design">{item.name?.last}</a>}
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
-                <div>content</div>
+                
+                <div>{item.amount} {transactionList.length}</div>
               </Skeleton>
             </List.Item>
           )}
@@ -126,6 +120,9 @@ export default function MainPage({ children }: childProps) {
 
   const InvestmentSummary = () => {
 
+    if(transactionList === null){
+      return <></>
+    }
     return (
       <>
         <h1>Investment</h1>
@@ -155,8 +152,8 @@ export default function MainPage({ children }: childProps) {
                   <Skeleton avatar title={false} //loading={item.loading} 
                     active>
                     <List.Item.Meta
-                      avatar={<Avatar src={item.picture.large} />}
-                      title={<a href="https://ant.design">{item.name?.last}</a>}
+                      //avatar={<Avatar src={item.picture.large} />}
+                      //title={<a href="https://ant.design">{item.name?.last}</a>}
                       description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                     />
                     <div>content</div>

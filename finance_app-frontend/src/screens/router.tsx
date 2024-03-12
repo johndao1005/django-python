@@ -13,26 +13,10 @@ import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import axios from "axios";
+import { AppAPIList } from "../constants/app";
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
-
-    // Get account details
-    useEffect(() => {
-        axios.get('http://127.0.0.1:8000/accounts/')
-            .then(response => {
-                console.log(response)
-                //TODO check token in local storage 
-                
-                //TODO add token into local storage
-                //TODO refresh token if needed
-                
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
-
     return (
         <Layout>
             <NavBar />
@@ -43,6 +27,7 @@ const FunctionGroup = () => {
         </Layout>
     )
 }
+
 
 const router = createBrowserRouter([
     {
@@ -67,7 +52,6 @@ const router = createBrowserRouter([
     },
 
 ]);
-
 
 
 

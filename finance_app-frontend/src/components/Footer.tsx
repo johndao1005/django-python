@@ -5,8 +5,8 @@ import { Footer } from "antd/es/layout/layout";
 import { navList } from '../constants/app';
 
 export default function SiteFooter() {
-  const error: any = useRouteError();
-  console.error(error);
+  //const error: any = useRouteError();
+  //console.error(error);
 
   return (
     <Footer className="footer">
