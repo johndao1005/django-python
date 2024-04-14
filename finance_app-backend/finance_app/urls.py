@@ -22,7 +22,7 @@ from transactions.views import CategoryViewSet, TransactionViewSet, InvestmentVi
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
-router.register(r'accounts', CategoryViewSet)
+router.register(r'accounts', AccountViewSet)
 router.register(r'transactions', TransactionViewSet)
 router.register(r'investments', InvestmentViewSet)
 router.register(r'forecasts', ForecastViewSet)

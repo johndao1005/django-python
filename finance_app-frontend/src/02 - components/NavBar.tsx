@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate, useRouteError } from "react-router-dom";
 import './styles.css';
 import { inherits } from "util";
 import { Header } from "antd/es/layout/layout";
-import { navList } from "../constants/app";
+import { navList } from "../05 - constants/app";
 import { Button, Flex } from "antd";
 
 export default function NavBar() {

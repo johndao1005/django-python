@@ -2,9 +2,9 @@ import React from "react";
 import { Outlet, useRouteError } from "react-router-dom";
 import UserInterface from "../interfaces";
 import { Layout } from "antd";
-import NavBar from "../../components/NavBar";
+import NavBar from "../../02 - components/NavBar";
 import { Content } from "antd/es/layout/layout";
-import SiteFooter from "../../components/Footer";
+import SiteFooter from "../../02 - components/Footer";
 
 const ErrorPage = () => {
   const error: any = useRouteError();

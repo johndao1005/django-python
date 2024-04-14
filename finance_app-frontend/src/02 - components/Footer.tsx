@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useRouteError } from "react-router-dom";
 import style from './style.module.css';
 import { Footer } from "antd/es/layout/layout";
-import { navList } from '../constants/app';
+import { navList } from '../05 - constants/app';
 
 export default function SiteFooter() {
   //const error: any = useRouteError();

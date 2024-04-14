@@ -5,7 +5,7 @@ import { Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import { Avatar, Flex, Image, List, Skeleton } from "antd";
 import axios from "axios";
-import { AppAPIList } from "../../constants/app";
+import { AppAPIList } from "../../05 - constants/app";
 
 interface contactType {
   first: string;

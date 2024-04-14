@@ -6,14 +6,14 @@ import {
 import ErrorPage from "./00_ErrorPages/ErrorPage";
 import WelcomePage from "./00_Welcome/Welcome";
 import MainPage from "./01_Main/MainPage";
-import NavBar from "../components/NavBar";
-import SiteFooter from "../components/Footer";
+import NavBar from "../02 - components/NavBar";
+import SiteFooter from "../02 - components/Footer";
 import TransactionListPage from "./02_Transactions/TransactionListPage";
 import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import axios from "axios";
-import { AppAPIList } from "../constants/app";
+import { AppAPIList } from "../05 - constants/app";
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
