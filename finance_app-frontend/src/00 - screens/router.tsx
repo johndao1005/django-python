@@ -12,8 +12,7 @@ import TransactionListPage from "./02_Transactions/TransactionListPage";
 import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
-import axios from "axios";
-import { AppAPIList } from "../05 - constants/app";
+import { Route, Routes } from 'react-router-dom';
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
@@ -32,7 +31,6 @@ const FunctionGroup = () => {
 const router = createBrowserRouter([
     {
         path: "/",
-        //element:<WelcomePage/>
         element: <FunctionGroup />,
         errorElement: <ErrorPage />,
         children: [
