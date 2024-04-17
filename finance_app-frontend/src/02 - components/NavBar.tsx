@@ -5,11 +5,22 @@ import { inherits } from "util";
 import { Header } from "antd/es/layout/layout";
 import { navList } from "../05 - constants/app";
 import { Button, Flex } from "antd";
+import useAuth from "../02 - hook/authticate";
+import { log } from "console";
 
 export default function NavBar() {
   //const error: any = useRouteError();
   //console.error(error); 
   const navigate = useNavigate();
+  const { user,login } = useAuth();
+  const signInOnClick = () => {
+    console.log(user)
+    login("john@gmail.com","123asd!A").then(
+      (response) => console.log(response)
+    ).catch((error) => {
+      console.error(error);
+    });
+  }
   return (
     <Header style={{ padding: "1%" }} className="navbar">
       <Flex style={{ padding: 0, width: "100%" }} align="center" gap="large" justify="space-between">
@@ -23,7 +34,9 @@ export default function NavBar() {
         </div>
         <div>
           <Link to={'/'}> Sign In</Link>
-          <Button children="Signup" onClick={() => navigate('/signup')} />
+          <Button children="Signup" onClick={
+            () => signInOnClick()
+            } />
         </div>
       </Flex>
 

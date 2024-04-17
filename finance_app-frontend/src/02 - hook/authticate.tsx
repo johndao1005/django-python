@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
-import firebase from 'firebase/app';
-import {auth} from './initial';
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from './initial';
 
 function useAuth() {
     const [user, setUser] = useState(null);
-
-
     useEffect(() => {
-        const unsubscribe = auth().onAuthStateChanged((user:any) => {
+        const unsubscribe = onAuthStateChanged(auth, (user: any) => {
             if (user) {
                 setUser(user);
             } else {
@@ -16,11 +14,11 @@ function useAuth() {
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [auth]);
 
-    const login = async (email:string, password:string) => {
+    const login = async (email: string, password: string) => {
         try {
-            await auth().signInWithEmailAndPassword(email, password);
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error(error);
         }
@@ -28,7 +26,7 @@ function useAuth() {
 
     const logout = async () => {
         try {
-            await auth().signOut();
+            await signOut(auth);
         } catch (error) {
             console.error(error);
         }

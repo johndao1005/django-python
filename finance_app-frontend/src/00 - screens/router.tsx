@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
     Outlet,
-    createBrowserRouter
 } from "react-router-dom";
 import ErrorPage from "./00_ErrorPages/ErrorPage";
 import WelcomePage from "./00_Welcome/Welcome";
@@ -12,7 +11,9 @@ import TransactionListPage from "./02_Transactions/TransactionListPage";
 import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from "./protectedRoute";
+
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
@@ -27,31 +28,22 @@ const FunctionGroup = () => {
     )
 }
 
-
-const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <FunctionGroup />,
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: "",
-                element: <MainPage />
-            },
-            {
-                path: "/transactions",
-                element: <TransactionListPage />,
-            },
-            {
-                path: "/investment",
-                element: <InvestmentListPage />,
-            },
-        ]
-    },
-
-]);
+const  MainRouter = () => {
+    return (
+      <Router>
+        <Routes>
+          <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
+            <Route index element={<MainPage />} />
+            <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/investment" element={<InvestmentListPage />} />
+            <Route path="/investments" element={<ProtectedRoute><InvestmentListPage /></ProtectedRoute>} />
+          </Route>
+        </Routes>
+      </Router>
+    );
+  }
 
 
 
-export default router
+export default MainRouter
 

@@ -35,17 +35,17 @@ export default function MainPage({ children }: childProps) {
   const [loading, setLoading] = useState(false);
 
   // Get transaction details
-  useEffect(() => {
-    axios.get(AppAPIList.Transactions)
-      .then((response )=> {
-        let list : null | TransactionsData[] = response.data
-        setTransactionList(list)
-        console.log(response)
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios.get(AppAPIList.Transactions)
+  //     .then((response )=> {
+  //       let list : null | TransactionsData[] = response.data
+  //       setTransactionList(list)
+  //       console.log(response)
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
 
   const OverView = () => {
