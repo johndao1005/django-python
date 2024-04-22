@@ -10,7 +10,7 @@ type FieldType = {
 };
 
 //create a login page with React component
-export default function LoginPage() {
+export default function RegisterPage() {
   const { user,login,logout } = useAuth();
   const navigate = useNavigate();
   const onFinish = (values: FieldType) => {}

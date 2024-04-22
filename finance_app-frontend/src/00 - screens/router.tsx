@@ -13,6 +13,8 @@ import { Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from "./protectedRoute";
+import LoginPage from "./00_Login/LoginPage";
+import RegisterPage from "./00_Register/RegisterPage";
 
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
@@ -36,7 +38,8 @@ const  MainRouter = () => {
             <Route index element={<MainPage />} />
             <Route path="/transactions" element={<TransactionListPage />} />
             <Route path="/investment" element={<InvestmentListPage />} />
-            <Route path="/investments" element={<ProtectedRoute><InvestmentListPage /></ProtectedRoute>} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<RegisterPage />} />
           </Route>
         </Routes>
       </Router>

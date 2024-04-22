@@ -1,25 +1,37 @@
 import React from "react";
 import { Link, Navigate, useNavigate, useRouteError } from "react-router-dom";
 import './styles.css';
-import { inherits } from "util";
 import { Header } from "antd/es/layout/layout";
 import { navList } from "../05 - constants/app";
 import { Button, Flex } from "antd";
 import useAuth from "../02 - hook/authticate";
-import { log } from "console";
+
+
 
 export default function NavBar() {
   //const error: any = useRouteError();
   //console.error(error); 
   const navigate = useNavigate();
-  const { user,login } = useAuth();
-  const signInOnClick = () => {
-    console.log(user)
-    login("john@gmail.com","123asd!A").then(
-      (response) => console.log(response)
-    ).catch((error) => {
-      console.error(error);
-    });
+  const { user,  logout } = useAuth();
+
+
+  const UserLogin = () => {
+    // if there is user display user email and hamburger menu
+    if (user) return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="large" justify="space-between">
+      <div style={{ padding: 0, width: "100%", alignContent: "center" }}>Welcome {user.email}</div>
+      <Button children="Sign out" onClick={
+        () => {
+          logout()
+          navigate('/')
+        }
+      } />
+    </Flex>
+    return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="middle" justify="space-between">
+      <Button children="Sign In" onClick={
+        () => navigate('/login')
+      } />
+      <Link style={{ padding: 0, width: "100%", alignContent: "center" }} to={'/register'}> Sign Up</Link>
+    </Flex>
   }
   return (
     <Header style={{ padding: "1%" }} className="navbar">
@@ -32,12 +44,7 @@ export default function NavBar() {
             <Link key={i} to={route.route}>{route.title}</Link>)
           )}
         </div>
-        <div>
-          <Link to={'/'}> Sign In</Link>
-          <Button children="Signup" onClick={
-            () => signInOnClick()
-            } />
-        </div>
+        <UserLogin />
       </Flex>
 
 
