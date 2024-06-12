@@ -34,11 +34,11 @@ export default function NavBar() {
     </Flex>
   }
   return (
-    <Header style={{ padding: "1%" }} className="navbar">
-      <Flex style={{ padding: 0, width: "100%" }} align="center" gap="large" justify="space-between">
+    <Header style={{  height :110}} className="navbar">
+      <Flex style={{ padding: 0, width: "100%" , margin: 0 }} align="center" gap="large"  justify="space-between">
         <div>
           <Link to={'/'}>
-            <img style={{ height: "30px" }} src="https://blog.hubspot.com/hs-fs/hubfs/image8-2.jpg?width=600&name=image8-2.jpg" />
+            <img style={{ height: 100,padding: 5 }} src="/3.png" />
           </Link>
           {navList.map((route, i) => (
             <Link key={i} to={route.route}>{route.title}</Link>)
