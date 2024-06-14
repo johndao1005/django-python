@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-    Outlet,
+  Outlet,
 } from "react-router-dom";
 import ErrorPage from "./00_ErrorPages/ErrorPage";
 import WelcomePage from "./00_Welcome/Welcome";
@@ -15,36 +15,39 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from "./protectedRoute";
 import LoginPage from "./00_Login/LoginPage";
 import RegisterPage from "./00_Register/RegisterPage";
+import Sider from "antd/es/layout/Sider";
 
 
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
-    return (
-        <Layout>
-            <NavBar />
-            <Content>
-                <Outlet />
-            </Content>
-            <SiteFooter />
-        </Layout>
-    )
+  return (
+    <Layout hasSider>
+      <NavBar />
+      <Layout>
+        <Content>
+          <Outlet />
+        </Content>
+        <SiteFooter />
+      </Layout>
+    </Layout>
+  )
 }
 
-const  MainRouter = () => {
-    return (
-      <Router>
-        <Routes>
-          <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
-            <Route index element={<MainPage />} />
-            <Route path="/transactions" element={<TransactionListPage />} />
-            <Route path="/investment" element={<InvestmentListPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<RegisterPage />} />
-          </Route>
-        </Routes>
-      </Router>
-    );
-  }
+const MainRouter = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
+          <Route index element={<MainPage />} />
+          <Route path="/transactions" element={<TransactionListPage />} />
+          <Route path="/investment" element={<InvestmentListPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<RegisterPage />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
+}
 
 
 
