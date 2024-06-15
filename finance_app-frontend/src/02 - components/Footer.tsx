@@ -9,12 +9,12 @@ export default function SiteFooter() {
   //console.error(error);
 
   return (
-    <Footer style={{background:"black"}} className="footer">
-      <div style={{ paddingTop: 10, color:"white" }}>@ 2024 FIREDay All rights reserved</div>
-      {navList.map((route, i) => (
-        <Link style={{ color: "white"}} key={i} to={route.route}>{route.title}</Link>)
-      )}
+    <Footer style={{justifyContent:"space-between", background: "black", paddingLeft: 70 , alignItems: "center", display:"flex" }} className="footer">
+      <div style={{ paddingTop: 10, color: "white" }}>@ 2024 FIREDay All rights reserved</div>
       <div>
+      {navList.map((route, i) => (
+        <Link style={{ color: "white" }} key={i} to={route.route}>{route.title}</Link>)
+      )}
       </div>
     </Footer>
   );
