@@ -3,8 +3,6 @@ import {
   Outlet,
   useNavigate,
 } from "react-router-dom";
-import ErrorPage from "./00_ErrorPages/ErrorPage";
-import WelcomePage from "./00_Welcome/Welcome";
 import MainPage from "./01_Main/MainPage";
 import NavBar from "../02 - components/NavBar";
 import SiteFooter from "../02 - components/Footer";
@@ -16,22 +14,27 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from "./protectedRoute";
 import LoginPage from "./00_Login/LoginPage";
 import RegisterPage from "./00_Register/RegisterPage";
+import ErrorPage from "./00_ErrorPages/ErrorPage";
 import Sider from "antd/es/layout/Sider";
 
 /* --------------------------------- Context -------------------------------- */
-interface NavigationContextType {
+interface ContextType {
   currentRoute: string;
   navigateTo: (route: string) => void;
 }
-interface NavigationProviderProps {
+interface ContextProviderProps {
   children: ReactNode;
 }
 
-const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
+const Context = createContext<ContextType | undefined>(undefined);
 
-export const NavigationProvider: FC<NavigationProviderProps> = ({ children }) => {
+export const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
+
   const navigate = useNavigate();
   const [currentRoute, setCurrentRoute] = useState<string>('/');
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<any>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   const navigateTo = (route: string) => {
     setCurrentRoute(route);
@@ -39,21 +42,42 @@ export const NavigationProvider: FC<NavigationProviderProps> = ({ children }) =>
   };
 
   return (
-    <NavigationContext.Provider value={{ currentRoute, navigateTo }}>
+    <Context.Provider value={{ currentRoute, navigateTo }}>
       {children}
-    </NavigationContext.Provider>
+    </Context.Provider>
   );
 };
 
 /* --------------------------------- Layout --------------------------------- */
 /*ANCHOR main function group of pages for the app, template for other group like admin or welcome*/
 const FunctionGroup = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileView, setMobileView] = useState(false);
+
   return (
     <Layout hasSider>
-      <NavBar />
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="50"
+        onBreakpoint={(broken) => {
+          setMobileView(broken);
+        }}
+        collapsible={false}
+        onCollapse={(value) => {setCollapsed(value);console.log("collasped " + value)}}
+        collapsed={collapsed}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0, top: 0, bottom: 0,
+          backgroundColor: "black",
+          width: collapsed ? 80 : 250,
+        }}>
+        <NavBar />
+      </Sider>
       <Layout>
-        <Content>
-          <Outlet />
+        <Content >
+          <Outlet  />
         </Content>
         <SiteFooter />
       </Layout>
@@ -63,11 +87,9 @@ const FunctionGroup = () => {
 /* ------------------------------- Main Router ------------------------------ */
 
 const MainRouter = () => {
-
-
   return (
     <Router>
-      <NavigationProvider>
+      <ContextProvider>
         <Routes>
           <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
             <Route index element={<MainPage />} />
@@ -77,7 +99,7 @@ const MainRouter = () => {
             <Route path="/signup" element={<RegisterPage />} />
           </Route>
         </Routes>
-      </NavigationProvider>
+      </ContextProvider>
     </Router>
   );
 }

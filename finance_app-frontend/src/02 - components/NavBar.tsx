@@ -11,25 +11,22 @@ import {
   DesktopOutlined,
   MailOutlined,
   MenuFoldOutlined,
-  MenuUnfoldOutlined,
+  LogoutOutlined,
+  SettingOutlined,
+  MessageOutlined,
+  UserOutlined,
   PieChartOutlined,
   HomeOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import Sider from "antd/es/layout/Sider";
-
 
 type MenuItem = Required<MenuProps>['items'][number];
-
-
-
 
 export default function NavBar() {
   //const error: any = useRouteError();
   //console.error(error); 
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const [collapsed, setCollapsed] = useState(false);
 
   const items: MenuItem[] = [
     {
@@ -50,17 +47,33 @@ export default function NavBar() {
       onClick: () => navigate('/transactions'),
       label: 'Transactions'
     },
-    // {
-    //   key: 'sub1',
-    //   label: 'Navigation One',
-    //   icon: <MailOutlined />,
-    //   children: [
-    //     { key: '5', label: 'Option 5' },
-    //     { key: '6', label: 'Option 6' },
-    //     { key: '7', label: 'Option 7' },
-    //     { key: '8', label: 'Option 8' },
-    //   ],
-    // },
+    {
+      key: 'sub1',
+      label: 'User',
+      icon: <UserOutlined />,
+      children: [
+        {
+          key: '5', label: 'User Details',
+          icon: <UserOutlined />
+        },
+        {
+          key: '6', label: 'Communication',
+          icon: <MessageOutlined />
+        },
+        {
+          key: '7', label: 'Settings',
+          icon: <SettingOutlined />
+        },
+        {
+          key: '8', label: 'Logout',
+          icon: <LogoutOutlined />,
+          onClick: () => {
+            logout();
+            navigate('/');
+          }
+        },
+      ],
+    },
     // {
     //   key: 'sub2',
     //   label: 'Navigation Two',
@@ -81,9 +94,7 @@ export default function NavBar() {
   ];
   /* -------------------------------- Function -------------------------------- */
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+
 
   /* -------------------------------- Components ------------------------------- */
   const UserLogin = () => {
@@ -117,41 +128,20 @@ export default function NavBar() {
 
   /* ------------------------------- Main Render ------------------------------ */
   return (
-    <Sider
-      breakpoint="lg"
-      collapsedWidth="50"
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      //collapsible
-      //onCollapse={(value) => setCollapsed(value)}
-      collapsed={collapsed}
-      className="navbar"
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        left: 0, top: 0, bottom: 0,
-        backgroundColor: "black"
-      }}>
-      <Flex vertical style={{ width: collapsed ? 50 : 197 }}>
-        <Link to={'/'}>
-          <img style={{ height: 50, padding: 5 }} src="/2.jpg" />
-        </Link>
-        <Button type="primary" onClick={toggleCollapsed}
-          style={{ margin: 5 }}>
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-        <Menu
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-          style={{ width: collapsed ? 50 : 197 }}
-          inlineCollapsed={collapsed}
-          items={items.map((item) => item)}
-        />
-      </Flex>
-    </Sider>
+
+    <Flex vertical >
+      <Link to={'/'}>
+        <img style={{ height: 50, padding: 5 }} src="/2.jpg" />
+      </Link>
+
+      <Menu
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        mode="inline"
+        theme="dark"
+        //coll={collapsed}
+        items={items.map((item) => item)}
+      />
+    </Flex>
   );
 }
