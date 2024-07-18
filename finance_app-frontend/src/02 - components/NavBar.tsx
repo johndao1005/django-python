@@ -10,6 +10,7 @@ import {
   ContainerOutlined,
   DesktopOutlined,
   MailOutlined,
+  MenuUnfoldOutlined,
   MenuFoldOutlined,
   LogoutOutlined,
   SettingOutlined,
@@ -134,14 +135,13 @@ export default function NavBar() {
         <img style={{ height: 50, padding: 5 }} src="/2.jpg" />
       </Link>
 
-      <Menu
+      <Menu 
         defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
-        //coll={collapsed}
         items={items.map((item) => item)}
       />
+
     </Flex>
   );
 }

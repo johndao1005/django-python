@@ -3,9 +3,37 @@ import { Form } from "react-router-dom";
 import "./styles.css"
 import { Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import { Avatar, Flex, Image, List, Skeleton } from "antd";
+import { Avatar, Button, Flex, Image, List, Skeleton } from "antd";
 import axios from "axios";
 import { AppAPIList } from "../../05 - constants/app";
+import {
+  PlusOutlined
+
+} from '@ant-design/icons';
+import { Line, Pie } from "react-chartjs-2";
+import {
+  
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,ArcElement, DoughnutController
+} from 'chart.js';
+
+// Registering components and scales with Chart.js
+ChartJS.register(
+  ArcElement, DoughnutController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface contactType {
   first: string;
@@ -33,7 +61,7 @@ interface TransactionsData {
 export default function MainPage({ children }: childProps) {
   const [transactionList, setTransactionList] = useState<null | TransactionsData[]>([]);
   const [loading, setLoading] = useState(false);
-
+  
   // Get transaction details
   // useEffect(() => {
   //   axios.get(AppAPIList.Transactions)
@@ -47,8 +75,62 @@ export default function MainPage({ children }: childProps) {
   //     });
   // }, []);
 
+  /* -------------------------------- Function -------------------------------- */
+
+
+
+  /* -------------------------------- Components ------------------------------- */
+  
+
+
 
   const OverView = () => {
+    const data = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'My First dataset',
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.4)',
+          hoverBorderColor: 'rgba(255, 99, 132, 1)',
+          data: [65, 59, 80, 81, 56, 55, 40], // Replace this with your Firebase data
+        },
+      ],
+    };
+    const pieData = {
+      labels: ['Rent', 'Groceries', 'Utilities', 'Entertainment', 'Misc'],
+      datasets: [
+        {
+          label: 'Budget Allocation',
+          data: [500, 300, 100, 200, 100], // Example data
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    };
+    const options = {
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+        },
+      },
+    };
     const username = "John"
     const financialStatus = {
       income: 12,
@@ -56,32 +138,33 @@ export default function MainPage({ children }: childProps) {
       asset: 12,
     }
 
+    const MyDieChartComponent = () => (
+      <div>
+        <h2>Budget Details</h2>
+        <div >
+          <Pie id="" data={pieData} options={options} />
+        </div>
+      </div>
+    );
+
     return (
-      <Flex vertical gap="large" justify="space-around" className="welcome">
-        <div style={{ "paddingBottom": "20%" }}>
+      <Flex vertical gap="large" justify="space-around" align="center"  className="welcome">
+        <div style={{ "margin": "auto" ,}}>
           <h1>
             Welcome back {username}
           </h1>
-          <div>
-            Button to add new income
-          </div>
-          <div>
+          <Button type="primary" icon={<PlusOutlined />}>New Transactions</Button>
+          {/*
+          TODO : Add a to do list
+           <div>
             To do list
-          </div>
+          </div> */}
         </div>
 
         <Flex align="flex-start" vertical>
+
           <div>
-            Total income : ${financialStatus.income}
-          </div>
-          <div>
-            Total Debt : ${financialStatus.debt}
-          </div>
-          <div>
-            Total Asset : ${financialStatus.asset}
-          </div>
-          <div>
-            <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/English_dialects1997.svg/1200px-English_dialects1997.svg.png" height={200} />
+            <MyDieChartComponent />
           </div>
         </Flex>
       </Flex>
@@ -90,7 +173,7 @@ export default function MainPage({ children }: childProps) {
 
   const RecentTransactions = () => {
     let count = 3
-    if(transactionList === null){
+    if (transactionList === null) {
       return <></>
     }
     return (
@@ -108,7 +191,7 @@ export default function MainPage({ children }: childProps) {
             >
               <Skeleton avatar title={false} //loading={item.loading} 
                 active>
-                
+
                 <div>{item.amount} {transactionList.length}</div>
               </Skeleton>
             </List.Item>
@@ -120,7 +203,7 @@ export default function MainPage({ children }: childProps) {
 
   const InvestmentSummary = () => {
 
-    if(transactionList === null){
+    if (transactionList === null) {
       return <></>
     }
     return (
@@ -167,11 +250,11 @@ export default function MainPage({ children }: childProps) {
       </>
     )
   }
-
+  /* ------------------------------- Main Render ------------------------------ */
   return (
 
-    <div style={{ background: "red", height: "100%", width: "100%" }}>
-      <div style={{ background: "pink" }}>
+    <div style={{ background: "red", height: "100%", width: "100%"}}>
+      <div style={{ background: "white" }}>
         <OverView />
       </div>
       <div style={{ background: "yellow" }}>
@@ -184,6 +267,4 @@ export default function MainPage({ children }: childProps) {
 
   );
 }
-
-
 
