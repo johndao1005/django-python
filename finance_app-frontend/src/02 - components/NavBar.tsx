@@ -6,12 +6,7 @@ import { navList } from "../05 - constants/app";
 import { Button, Col, Drawer, Flex, Menu, Row } from "antd";
 import useAuth from "../02 - hook/authticate";
 import {
-  AppstoreOutlined,
   ContainerOutlined,
-  DesktopOutlined,
-  MailOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
   LogoutOutlined,
   SettingOutlined,
   MessageOutlined,
