@@ -24,16 +24,6 @@ ChartJS.register(
     Legend
 );
 
-interface contactType {
-    first: string;
-    last: string;
-    avatar: any;
-    twitter: string;
-    notes: string;
-    favorite: true;
-}
-
-type childProps = { children?: React.ReactNode }
 interface TransactionsData {
     id: number;
     type: string;
@@ -95,18 +85,11 @@ export function InvestmentChart() {
             },
         },
     };
-    const username = "John"
-    const financialStatus = {
-        income: 12,
-        debt: 12,
-        asset: 12,
-    }
-
     return (
         <div>
-            <h2>Budget Details</h2>
+            <h2>Portfolio Breakdown</h2>
             <div >
-                <Pie id="budget" data={pieData} options={options} />
+                <Pie id="investment" data={pieData} options={options} />
             </div>
         </div>
     )
@@ -160,20 +143,10 @@ export function ExpenseChart() {
             },
         },
     };
-    const username = "John"
-    const financialStatus = {
-        income: 12,
-        debt: 12,
-        asset: 12,
-    }
-
     return (
-        <div>
-            <h2>Budget Details</h2>
             <div >
-                <Pie id="budget" data={pieData} options={options} />
+                <Pie id="expenses" data={pieData} options={options} />
             </div>
-        </div>
     )
 
 }

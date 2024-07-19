@@ -3,7 +3,7 @@ import { Form } from "react-router-dom";
 import "./styles.css"
 import { Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
-import { Avatar, Button, Card, Flex, Image, List, Skeleton } from "antd";
+import { Avatar, Button, Card, Divider, Flex, Image, List, Skeleton } from "antd";
 import axios from "axios";
 import { AppAPIList } from "../../05 - constants/app";
 import {
@@ -57,11 +57,14 @@ export default function MainPage({ children }: childProps) {
   /* ------------------------------- Main Render ------------------------------ */
   return (
 
-    <div style={{ background: "white", height: "100%", width: "100%", paddingBottom: 40 }}>
+    <Flex vertical gap={"large"} style={{ margin:"auto 0",background: "white", height: "100%", width: "100%", paddingBottom: 40 }}>
       <Overview />
+      <Divider children={"Transactions"}/>
       <RecentTransactions loading={loading} transactionList={transactionList} />
+   
+      <Divider children={"Investment"}/>
       <InvestmentSummary loading={loading} transactionList={transactionList} />
-    </div>
+    </Flex>
 
   );
 }

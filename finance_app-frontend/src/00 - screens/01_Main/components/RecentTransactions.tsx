@@ -35,8 +35,8 @@ export default function  RecentTransactions  ({loading, transactionList}: {loadi
         }}  style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
         {/* Card for Expenses */}
         <Card title="Expenses" 
-        style={{ width: 300, textAlign: "start", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }} 
-        extra={<Link to={"/"}><ArrowsAltOutlined /></Link>} >
+        style={{ width: 300, textAlign: "start",margin:20, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }} 
+        extra={<Link to={"/transactions"}><ArrowsAltOutlined /></Link>} >
           <List
             className="demo-loadmore-list"
             loading={loading}
@@ -47,8 +47,8 @@ export default function  RecentTransactions  ({loading, transactionList}: {loadi
 
         {/* Card for Income */}
         <Card title="Income" 
-        style={{ width: 300, textAlign: "start", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }} 
-        extra={<Link to={"/"}><ArrowsAltOutlined /></Link>} >
+        style={{ width: 300, textAlign: "start",margin:20, boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)" }} 
+        extra={<Link to={"/transactions"}><ArrowsAltOutlined /></Link>} >
           <List
             className="demo-loadmore-list"
             loading={loading}

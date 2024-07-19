@@ -1,20 +1,14 @@
 import { Button, Flex, Row } from "antd";
-import { BudgetChart } from "./Charts";
+import { ExpenseChart } from "./Charts";
 import {
-    PlusOutlined
+    PlusOutlined, ArrowsAltOutlined
 } from '@ant-design/icons';
+import { Link } from "react-router-dom";
 
 
 
 export default function Overview() {
-
     const username = "John"
-    const financialStatus = {
-        income: 12,
-        debt: 12,
-        asset: 12,
-    }
-
 
     return (
         <Row gutter={{
@@ -29,17 +23,18 @@ export default function Overview() {
                 </h1>
                 <Button type="primary" icon={<PlusOutlined />}>New Transactions</Button>
                 {/*
-            TODO : Add a to do list
+            TODO : Add a to do list or upcoming events
              <div>
               To do list
             </div> */}
             </div>
 
-            <Flex align="flex-start" vertical>
-
-                <div>
-                    <BudgetChart />
-                </div>
+            <Flex  align="flex-center" vertical>
+                <Flex align="flex-start" justify="center" gap="small" style={{ alignItems: "center", height:28, marginTop:50 }}>
+                    <h2>Expense Breakdown</h2>
+                    <Link to={"/transactions"}><ArrowsAltOutlined /></Link>
+                </Flex>
+                <ExpenseChart />
             </Flex>
         </Row>
     )
