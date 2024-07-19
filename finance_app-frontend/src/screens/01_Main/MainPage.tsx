@@ -5,17 +5,14 @@ import { Header } from "antd/es/layout/layout";
 import Sider from "antd/es/layout/Sider";
 import { Avatar, Button, Card, Divider, Flex, Image, List, Skeleton } from "antd";
 import axios from "axios";
-import { AppAPIList } from "../../05 - constants/app";
+import { AppAPIList } from "../../constants/app";
 import {
   PlusOutlined
 
 } from '@ant-design/icons';
 import Overview from "./components/Overview";
-import { InvestmentChart } from "./components/Charts";
-import InvestmentSummary from "./components/InvestmentSummary";
 import RecentTransactions from "./components/RecentTransactions";
-
-
+import InvestmentSummary from "./components/InvestmentSummary";
 
 interface contactType {
   first: string;
@@ -61,7 +58,6 @@ export default function MainPage({ children }: childProps) {
       <Overview />
       <Divider children={"Transactions"}/>
       <RecentTransactions loading={loading} transactionList={transactionList} />
-   
       <Divider children={"Investment"}/>
       <InvestmentSummary loading={loading} transactionList={transactionList} />
     </Flex>

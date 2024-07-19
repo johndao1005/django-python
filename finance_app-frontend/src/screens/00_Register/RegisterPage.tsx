@@ -1,6 +1,6 @@
 import React from "react";
 import {  useNavigate } from "react-router-dom";
-import useAuth from "../../02 - hook/authticate";
+import useAuth from "../../hook/authticate";
 import { Button, Checkbox, Form, Input,Card, Flex } from "antd";
 
 type FieldType = {

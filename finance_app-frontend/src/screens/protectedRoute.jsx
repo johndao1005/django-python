@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../02 - hook/authticate'; // replace with the path to the useAuth hook
+import useAuth from '../hook/authticate'; // replace with the path to the useAuth hook
 
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
-import './99 - others/App.css';
-import MainRouter from './00 - screens/router';
+import './others/App.css';
+import MainRouter from './screens/router';
 
 function App() {
     

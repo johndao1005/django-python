@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../02 - hook/authticate";
+import useAuth from "../../hook/authticate";
 import { Button, Checkbox, Form, Input, Card, Flex, Tabs ,FormListFieldData} from "antd";
 
 //Define the type of the form field
@@ -12,7 +12,7 @@ type FieldType = {
 };
 
 //create a login page with React component
-export default function ErrorPage() {
+export default function LoginPage() {
   /* --------------------------------- UseState ------------------------------- */
   const { user, login, logout } = useAuth();
   const navigate = useNavigate();

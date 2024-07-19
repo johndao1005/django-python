@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate, useRouteError } from "react-router-dom";
 import './styles.css';
 import { Header } from "antd/es/layout/layout";
-import { navList } from "../05 - constants/app";
+import { navList } from "../constants/app";
 import { Button, Col, Drawer, Flex, Menu, Row } from "antd";
-import useAuth from "../02 - hook/authticate";
+import useAuth from "../hook/authticate";
 import {
   ContainerOutlined,
   LogoutOutlined,

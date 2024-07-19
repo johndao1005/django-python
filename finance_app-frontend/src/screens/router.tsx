@@ -4,8 +4,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import MainPage from "./01_Main/MainPage";
-import NavBar from "../02 - components/NavBar";
-import SiteFooter from "../02 - components/Footer";
+import NavBar from "../components/NavBar";
+import SiteFooter from "../components/Footer";
 import TransactionListPage from "./02_Transactions/TransactionListPage";
 import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Button, Layout } from "antd";
@@ -95,7 +95,7 @@ const FunctionGroup = () => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
       </Sider>
-      <Layout style={{ marginLeft :  collapsed ? 50 : 200,}}>
+      <Layout style={{ marginLeft :  collapsed ? 50 : 200,minHeight:"100vh"}}>
         <Content >
           <Outlet />
         </Content>
