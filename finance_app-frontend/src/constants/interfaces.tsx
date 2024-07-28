@@ -43,25 +43,22 @@ export type currentUser = null | {
 }
 
 export type firebaseUser = null | {
-  accessToken: string;
-  email: string;
   uid: string;
+  email: string;
   displayName: string;
   photoURL: string;
   emailVerified: boolean;
-  phoneNumber: string;
+  phoneNumber: string | null;
   isAnonymous: boolean;
-  tenantId: string;
+  tenantId: string | null;
   providerData: any;
-  apiKey: string;
-  appName: string;
-  authDomain: string;
-  stsTokenManager: any;
-  redirectEventId: string;
-  lastLoginAt: string;
-  createdAt: string;
-  metadata : metadataType;
+  metadata: {
+    creationTime: string | null;
+    lastSignInTime: string | null;
+  };
+  refreshToken: string;
 }
+
 export type metadataType = {
   creationTime: string;
   lastSignInTime: string;

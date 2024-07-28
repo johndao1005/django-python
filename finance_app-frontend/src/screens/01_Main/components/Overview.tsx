@@ -55,7 +55,7 @@ export default function Overview() {
             </Flex>
             <Modal
         title="Form in Modal"
-        visible={isModalVisible}
+        open={isModalVisible}
         onOk={handleOk}
         onCancel={modalToggle}
         footer={null}

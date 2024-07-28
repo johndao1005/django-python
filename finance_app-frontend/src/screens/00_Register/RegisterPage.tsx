@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import {  useNavigate } from "react-router-dom";
-import { Button, Checkbox, Form, Input,Card, Flex } from "antd";
-import { firebaseRegister } from "../../store/actions/login.action";
-import { useDispatch } from "react-redux";
-
+import React, { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, useAppDispatch, useAppSelector } from '../../hook/initial';
+import {setUser} from '../../store/login.action';
+import { RootState } from '../../store';
+import { mapUserCredentialToFirebaseUser } from '../../ulti/firebaseUserMapper'
+import {  useNavigate } from 'react-router-dom';
+import { Button, Card, Checkbox, Flex,Form, Input } from 'antd';
 type FieldType = {
   username?: string;
   password?: string;
@@ -12,30 +14,31 @@ type FieldType = {
 
 //create a login page with React component
 export default function RegisterPage() {
-  const [user, setUser] = useState(null);
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const onFinish = (values: FieldType) => {}
   const onFinishFailed = (errorInfo: any) => {}
   //create Login form with React component takes email and password
+  const dispatch = useAppDispatch();
+  const authState = useAppSelector((state: RootState) => state.auth);
 
-  const handleRegister = () => {
-    setLoading(true);
-    firebaseRegister({user},()=>{
-      setLoading(false);
-    })
-  
-    
-  };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const currentUser = mapUserCredentialToFirebaseUser(user);
+        dispatch(setUser(currentUser),true);
+      } else {
+        dispatch(setUser(authState.user));
+      }
+    });
+
+    return () => unsubscribe();
+  }, [dispatch]);
 
   return (
    <Flex vertical align="center" justify="center" style={{ height: "100vh" }}>
       <Card>
      <Form
     name="basic"
-    labelCol={{ span: 8 }}
-    wrapperCol={{ span: 16 }}
     style={{ maxWidth: 600 }}
     initialValues={{ remember: true }}
     onFinish={onFinish}

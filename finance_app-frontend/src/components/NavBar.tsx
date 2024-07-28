@@ -4,7 +4,6 @@ import './styles.css';
 import { Header } from "antd/es/layout/layout";
 import { navList } from "../constants/app";
 import { Button, Col, Drawer, Flex, Menu, Row } from "antd";
-import useAuth from "../hook/authticate";
 import {
   ContainerOutlined,
   LogoutOutlined,
@@ -14,15 +13,17 @@ import {
   PieChartOutlined,
   HomeOutlined
 } from '@ant-design/icons';
+import { auth, useAppDispatch, useAppSelector } from '../hook/initial';
 import type { MenuProps } from 'antd';
+import { RootState } from "../store";
+import { clearUser } from "../store/login.action";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function NavBar() {
-  //const error: any = useRouteError();
-  //console.error(error); 
+  const dispatch = useAppDispatch();
+  const authState = useAppSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
 
   const items: MenuItem[] = [
     {
@@ -64,7 +65,7 @@ export default function NavBar() {
           key: '8', label: 'Logout',
           icon: <LogoutOutlined />,
           onClick: () => {
-            logout();
+            dispatch(clearUser());
             navigate('/');
           }
         },
@@ -95,11 +96,11 @@ export default function NavBar() {
   /* -------------------------------- Components ------------------------------- */
   const UserLogin = () => {
     // if there is user display user email and hamburger menu
-    if (user) return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="large" justify="space-between">
-      <div style={{ padding: 0, width: "100%", alignContent: "center" }}>Welcome {user.email}</div>
+    if (authState.user) return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="large" justify="space-between">
+      <div style={{ padding: 0, width: "100%", alignContent: "center" }}>Welcome {authState.user.email}</div>
       <Button children="Sign out" onClick={
         () => {
-          logout()
+          dispatch(clearUser());
           navigate('/')
         }
       } />

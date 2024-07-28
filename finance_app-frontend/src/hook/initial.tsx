@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { initializeFirestore, FieldValue ,getFirestore  } from "firebase/firestore";
 import { getAnalytics, settings } from "firebase/analytics";
 import { getAuth } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux'
+import type { AppDispatch, RootState } from '../store'
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,5 +27,7 @@ const auth = getAuth(app);
 const analytics = getAnalytics(app);
 //const db = initializeFirestore(app,{ignoreUndefinedProperties: true});
 const db = getFirestore(app);
+const useAppDispatch  = useDispatch.withTypes<AppDispatch>()
+const useAppSelector = useSelector.withTypes<RootState>()
 
-export { auth, analytics, db,FieldValue  };
+export { auth,useAppDispatch,useAppSelector, analytics, db,FieldValue  };
