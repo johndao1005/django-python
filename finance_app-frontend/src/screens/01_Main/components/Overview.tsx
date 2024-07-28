@@ -1,14 +1,31 @@
-import { Button, Flex, Row } from "antd";
+import { Button, Flex, Input, Modal, Row,Form } from "antd";
 import { ExpenseChart } from "./Charts";
 import {
     PlusOutlined, ArrowsAltOutlined
 } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
+import { useState } from "react";
+import { FormInstance } from 'antd/es/form';
 
 
 
 export default function Overview() {
     const username = "John"
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const modalToggle = () => {
+        setIsModalVisible(!isModalVisible);
+      };
+    
+      const handleOk = () => {
+        setIsModalVisible(false);
+      };
+    const onFinish = (values:string) => {
+        console.log('Success:', values);
+        setIsModalVisible(false);
+      };
+    const onFinishFailed = () => {
+        console.log('Failed:');
+      };
 
     return (
         <Row gutter={{
@@ -21,7 +38,7 @@ export default function Overview() {
                 <h1>
                     Welcome back {username}
                 </h1>
-                <Button type="primary" icon={<PlusOutlined />}>New Transactions</Button>
+                <Button onClick={modalToggle} type="primary" icon={<PlusOutlined />}>New Transactions</Button>
                 {/*
             TODO : Add a to do list or upcoming events
              <div>
@@ -36,6 +53,42 @@ export default function Overview() {
                 </Flex>
                 <ExpenseChart />
             </Flex>
+            <Modal
+        title="Form in Modal"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={modalToggle}
+        footer={null}
+      >
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            label="Username"
+            name="username"
+            rules={[{ required: true, message: 'Please input your username!' }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
         </Row>
     )
 

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import useAuth from "../../hook/authticate";
 import { Button, Checkbox, Form, Input,Card, Flex } from "antd";
+import { firebaseRegister } from "../../store/actions/login.action";
+import { useDispatch } from "react-redux";
 
 type FieldType = {
   username?: string;
@@ -11,11 +12,23 @@ type FieldType = {
 
 //create a login page with React component
 export default function RegisterPage() {
-  const { user,login,logout } = useAuth();
+  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
   const onFinish = (values: FieldType) => {}
   const onFinishFailed = (errorInfo: any) => {}
   //create Login form with React component takes email and password
+
+  const handleRegister = () => {
+    setLoading(true);
+    firebaseRegister({user},()=>{
+      setLoading(false);
+    })
+  
+    
+  };
+
   return (
    <Flex vertical align="center" justify="center" style={{ height: "100vh" }}>
       <Card>

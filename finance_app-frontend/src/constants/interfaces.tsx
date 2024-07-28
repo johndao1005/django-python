@@ -35,3 +35,34 @@ export  interface BudgetData {
   user: number;
   category: number;
 }
+
+export type currentUser = null | {
+  user:
+  {email: null | string;
+  password: string}
+}
+
+export type firebaseUser = null | {
+  accessToken: string;
+  email: string;
+  uid: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
+  phoneNumber: string;
+  isAnonymous: boolean;
+  tenantId: string;
+  providerData: any;
+  apiKey: string;
+  appName: string;
+  authDomain: string;
+  stsTokenManager: any;
+  redirectEventId: string;
+  lastLoginAt: string;
+  createdAt: string;
+  metadata : metadataType;
+}
+export type metadataType = {
+  creationTime: string;
+  lastSignInTime: string;
+}

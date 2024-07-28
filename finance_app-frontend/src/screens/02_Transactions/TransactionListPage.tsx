@@ -5,7 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Card, Col, Divider, List, Progress, Row } from 'antd';
 import { Link } from 'react-router-dom';
-import { TransactionsData } from "../interfaces";
+import { TransactionsData } from "../../constants/interfaces";
 import { BudgetChart } from "./components/Charts";
 
 interface contactType {

@@ -10,6 +10,7 @@ export const REF_NEWS_CATEGORIES = 'newsCategories';
 export const REF_NEWS_TAGS = 'newsTags';
 export const REF_NEWS_POSTS = 'newsPosts';
 export const REF_APP_CATEGORIES = 'appCategories';
+export const MEMBERSHIP_FREE = 'MEMBERSHIP_FREE';
 export const REF_APP_SUB_CATEGORIES = 'appSubCategories';
 export const REF_SETTINGS = 'settings';
 export const REF_FAVOURITE = 'favourite';
@@ -72,6 +73,3 @@ export const GET_LOGIN_LOCK_SUCCESS = 'get_login_lock_success';
 
 // notification ref
 export const NOTIFICATION_CLIENT = 'notification_client';
-
-// WP ref
-export const WP_API_JSON = 'https://haliaustralia.com/wp-json/wp/v2';

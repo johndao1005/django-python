@@ -3,7 +3,7 @@ import {
   ArrowsAltOutlined
 
 } from '@ant-design/icons';
-import { TransactionsData } from "../../interfaces";
+import { TransactionsData } from "../../../constants/interfaces";
 import { Link } from "react-router-dom";
   
   
