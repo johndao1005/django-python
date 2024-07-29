@@ -2,7 +2,7 @@ import {
     APP_CATEGORIES_SUCCESS,
     APP_SUB_CATEGORIES_SUCCESS,
     SELECT_APP_CATEGORY_SUCCESS,
-  } from '../string';
+  } from '../../constants/string';
   
   // Tạo model
   const init = {

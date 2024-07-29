@@ -1,6 +1,5 @@
 // src/store/authSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { User, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../hook/initial';
 import { firebaseUser } from '../constants/interfaces';
@@ -13,6 +12,7 @@ import {
 } from '../constants/string';
 import { mapUserCredentialToFirebaseUser } from '../ulti/firebaseUserMapper';
 import { locale } from 'moment';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
 interface AuthState {
   user: firebaseUser | null;

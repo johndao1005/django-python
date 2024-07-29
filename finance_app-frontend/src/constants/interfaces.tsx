@@ -63,3 +63,9 @@ export type metadataType = {
   creationTime: string;
   lastSignInTime: string;
 }
+
+export interface FirebaseAuthError {
+  code: string;
+  message: string;
+  // Additional properties may be included
+}

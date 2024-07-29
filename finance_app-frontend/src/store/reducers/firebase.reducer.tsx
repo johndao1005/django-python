@@ -1,4 +1,4 @@
-import {FIREBASE_AUTH_STATUS} from '../string';
+import {FIREBASE_AUTH_STATUS} from '../../constants/string';
 
 // Tạo model
 const firebase = {

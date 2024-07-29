@@ -16,13 +16,13 @@ import {
 import { auth, useAppDispatch, useAppSelector } from '../hook/initial';
 import type { MenuProps } from 'antd';
 import { RootState } from "../store";
-import { clearUser } from "../store/login.action";
+import { firebaseLogout } from "../store/login.action";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function NavBar() {
   const dispatch = useAppDispatch();
-  const authState = useAppSelector((state: RootState) => state.auth);
+  const {user,loading,error} = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const items: MenuItem[] = [
@@ -65,7 +65,7 @@ export default function NavBar() {
           key: '8', label: 'Logout',
           icon: <LogoutOutlined />,
           onClick: () => {
-            dispatch(clearUser());
+            dispatch(firebaseLogout());
             navigate('/');
           }
         },
@@ -96,11 +96,11 @@ export default function NavBar() {
   /* -------------------------------- Components ------------------------------- */
   const UserLogin = () => {
     // if there is user display user email and hamburger menu
-    if (authState.user) return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="large" justify="space-between">
-      <div style={{ padding: 0, width: "100%", alignContent: "center" }}>Welcome {authState.user.email}</div>
+    if (user) return <Flex style={{ height: "100%", padding: 0 }} align="left" gap="large" justify="space-between">
+      <div style={{ padding: 0, width: "100%", alignContent: "center" }}>Welcome {user.email}</div>
       <Button children="Sign out" onClick={
         () => {
-          dispatch(clearUser());
+          dispatch(firebaseLogout());
           navigate('/')
         }
       } />

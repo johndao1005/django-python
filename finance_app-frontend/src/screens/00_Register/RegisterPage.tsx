@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, useAppDispatch, useAppSelector } from '../../hook/initial';
-import {setUser} from '../../store/login.action';
 import { RootState } from '../../store';
 import { mapUserCredentialToFirebaseUser } from '../../ulti/firebaseUserMapper'
 import {  useNavigate } from 'react-router-dom';
 import { Button, Card, Checkbox, Flex,Form, Input } from 'antd';
+import { firebaseLogin, firebaseRegister } from '../../store/login.action';
 type FieldType = {
   username?: string;
   password?: string;
@@ -19,18 +19,24 @@ export default function RegisterPage() {
   const onFinishFailed = (errorInfo: any) => {}
   //create Login form with React component takes email and password
   const dispatch = useAppDispatch();
-  const authState = useAppSelector((state: RootState) => state.auth);
+  const {user,loading,error} = useAppSelector((state) => state.auth);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(firebaseRegister({ user: { email, password } }));
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const currentUser = mapUserCredentialToFirebaseUser(user);
-        dispatch(setUser(currentUser),true);
-      } else {
-        dispatch(setUser(authState.user));
-      }
+        dispatch(firebaseLogin({user:currentUser}));
+      } 
     });
-
     return () => unsubscribe();
   }, [dispatch]);
 
