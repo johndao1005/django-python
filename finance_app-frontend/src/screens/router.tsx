@@ -11,7 +11,6 @@ import InvestmentListPage from "./03_Investments/InvestmentListPage";
 import { Button, Layout } from "antd";
 import { Content } from "antd/es/layout/layout";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ProtectedRoute from "./protectedRoute";
 import LoginPage from "./00_Login/LoginPage";
 import RegisterPage from "./00_Register/RegisterPage";
 import ErrorPage from "./00_ErrorPages/ErrorPage";
@@ -20,7 +19,9 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined
 } from '@ant-design/icons';
-import type { MenuProps } from 'antd';
+import { useAppDispatch, useAppSelector } from "../hook/initial";
+import { AuthState } from "../constants/interfaces";
+import WelcomePage from "./00_Welcome/Welcome";
 /* --------------------------------- Context -------------------------------- */
 interface ContextType {
   currentRoute: string;
@@ -70,7 +71,7 @@ const FunctionGroup = () => {
           setMobileView(broken);
         }}
         //collapsible={mobileView}
-        onCollapse={(value) => { setCollapsed(value); console.log("collasped " + value) }}
+        onCollapse={(value) => { setCollapsed(value);}}
         collapsed={collapsed}
         style={{
           overflow: 'auto',
@@ -95,18 +96,51 @@ const FunctionGroup = () => {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
       </Sider>
-      <Layout style={{ marginLeft :  collapsed ? 50 : 200,minHeight:"100vh"}}>
+      <Layout style={{ marginLeft: collapsed ? 50 : 200, minHeight: "100vh" }}>
         <Content >
           <Outlet />
         </Content>
-        <SiteFooter  />
+        <SiteFooter />
       </Layout>
     </Layout>
   )
 }
 /* ------------------------------- Main Router ------------------------------ */
 
+const AppRouter = () => {
+  return (
+    <Router>
+      <ContextProvider>
+        <Routes>
+          <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
+            <Route index element={<MainPage />} />
+            <Route path="/transactions" element={<TransactionListPage />} />
+            <Route path="/investment" element={<InvestmentListPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<RegisterPage />} />
+          </Route>
+        </Routes>
+      </ContextProvider>
+    </Router>
+  );
+}
+
 const MainRouter = () => {
+  const { user, loading, error } = useAppSelector((state) => state.auth as AuthState);
+  if(!user){
+    return (
+      <Router>
+        <ContextProvider>
+          <Routes>
+            <Route path="/" element={<FunctionGroup />} errorElement={<ErrorPage />}>
+            <Route index element={<WelcomePage />} />
+            </Route>
+          </Routes>
+        </ContextProvider>
+      </Router>
+    );
+  }
+  
   return (
     <Router>
       <ContextProvider>

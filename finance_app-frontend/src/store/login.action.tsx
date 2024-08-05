@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { User, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../hook/initial';
-import { firebaseUser } from '../constants/interfaces';
+import { AuthState, firebaseUser } from '../constants/interfaces';
 import {
   MEMBERSHIP_FREE,
   REGISTER_FAILED,
@@ -14,11 +14,6 @@ import {
 import { mapUserCredentialToFirebaseUser } from '../ulti/firebaseUserMapper';
 import { locale } from 'moment';
 
-interface AuthState {
-  user: firebaseUser | null;
-  loading: boolean;
-  error: string | null;
-}
 
 locale("vi")
 export const firebaseRegister = createAsyncThunk(

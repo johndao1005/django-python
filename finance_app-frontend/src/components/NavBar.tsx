@@ -17,18 +17,19 @@ import { auth, useAppDispatch, useAppSelector } from '../hook/initial';
 import type { MenuProps } from 'antd';
 import { RootState } from "../store";
 import { firebaseLogout } from "../store/login.action";
+import { AuthState } from "../constants/interfaces";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export default function NavBar() {
   const dispatch = useAppDispatch();
-  const {user,loading,error} = useAppSelector((state) => state.auth);
+  const {user,loading,error} = useAppSelector((state) => state.auth as AuthState);
   const navigate = useNavigate();
 
   const items: MenuItem[] = [
     {
       key: '1',
-      icon: <HomeOutlined />,
+      icon: <HomeOutlined  />,
       onClick: () => navigate('/'),
       label: 'Home'
     },

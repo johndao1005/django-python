@@ -69,3 +69,9 @@ export interface FirebaseAuthError {
   message: string;
   // Additional properties may be included
 }
+
+export interface AuthState {
+  user: firebaseUser | null;
+  loading: boolean;
+  error: string | null;
+}
