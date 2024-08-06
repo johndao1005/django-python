@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate, useRouteError } from "react-router-dom";
 import './styles.css';
 import { Header } from "antd/es/layout/layout";
 import { navList } from "../constants/app";
-import {  Menu,  } from "antd";
+import { Button, Image, Menu, } from "antd";
 import {
   ContainerOutlined,
   PieChartOutlined,
@@ -17,58 +17,44 @@ import { AuthState } from "../constants/interfaces";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-export default function SiteHeader({props}:React.PropsWithChildren<any>) {
-  const dispatch = useAppDispatch();
-  const {user,loading,error} = useAppSelector((state) => state.auth as AuthState);
+export default function SiteHeader({ props }: React.PropsWithChildren<any>) {
   const navigate = useNavigate();
-
-
-  const publicNav: MenuItem[] = [
+  const items: MenuItem[] = [
     {
       key: '1',
-      icon: <HomeOutlined  />,
-      onClick: () => navigate('/'),
-      label: 'Home'
-    },
-    {
-      key: '2',
       icon: <PieChartOutlined />,
       onClick: () => navigate('/privacy'),
       label: 'Privacy'
     },
+    // {
+    //   key: '2',
+    //   icon: <ContainerOutlined />,
+    //   onClick: () => navigate('/terms'),
+    //   label: 'Terms'
+    // },
     {
       key: '3',
-      icon: <ContainerOutlined />,
-      onClick: () => navigate('/terms'),
-      label: 'Terms'
-    },
-    {
-      key: '4',
       icon: <ContainerOutlined />,
       onClick: () => navigate('/about'),
       label: 'About'
     },
-    
+
   ];
-  /* -------------------------------- Function -------------------------------- */
-
-  const handleReadMoreClick = () => {
-    navigate('/about');
-  };
-
-  const handlePrivacyClick = () => {
-    navigate('/privacy');
-  };
 
   /* ------------------------------- Main Render ------------------------------ */
   return (
 
-    <Header>
-    <div className="logo" />
-    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-      <Menu.Item key="1" onClick={handleReadMoreClick}>Read More</Menu.Item>
-      <Menu.Item key="2" onClick={handlePrivacyClick}>Privacy</Menu.Item>
-    </Menu>
-  </Header>
+    <Header style={{ display: 'flex', maxHeight: 50, backgroundColor: "black" }}>
+      <a onClick={() => navigate("/")}>
+        <img style={{ height: 50, padding: 5, margin: "auto" }} src="/2.jpg" />
+      </a>
+      <Menu
+        mode="horizontal"
+        defaultSelectedKeys={['1']}
+        items={items}
+        style={{ marginRight: 10, height: 50, flex: 1, display: 'flex', justifyContent: 'flex-end', backgroundColor: "black", textDecoration: "none", color: "white", fontSize: 11 }}
+      />
+      <Button style={{ margin: "auto", justifyContent: 'flex-end', backgroundColor: "black", textDecoration: "none", color: "white", fontSize: 11 }} onClick={() => navigate('/login')}>Login</Button>
+    </Header>
   );
 }

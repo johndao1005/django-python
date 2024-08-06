@@ -14,9 +14,7 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <Layout className="layout">
-
-      <Content style={{ padding: '0 50px' }}>
+    <>
         <Row justify="center" style={{ marginTop: '50px' }}>
           <Col span={12} style={{ textAlign: 'center' }}>
             <Title level={1}>Welcome to Your Personal Finance Management App</Title>
@@ -25,12 +23,50 @@ const LandingPage: React.FC = () => {
             </Paragraph>
             <Button type="primary" size="large" onClick={handleLoginClick}>Get Started</Button>
           </Col>
+          
         </Row>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        Finance App ©2024 Created by [Your Name]
-      </Footer>
-    </Layout>
+        <Row justify="center" style={{ marginTop: '50px' }}>
+          <Col span={12} style={{ textAlign: 'center' }}>
+            <Title level={1}>Welcome to Your Personal Finance Management App</Title>
+            <Paragraph>
+              Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.
+            </Paragraph>
+            <Button type="primary" size="large" onClick={handleLoginClick}>Get Started</Button>
+          </Col>
+          
+        </Row>
+        <Row justify="center" style={{ marginTop: '50px' }}>
+          <Col span={12} style={{ textAlign: 'center' }}>
+            <Title level={1}>Welcome to Your Personal Finance Management App</Title>
+            <Paragraph>
+              Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.
+            </Paragraph>
+            <Button type="primary" size="large" onClick={handleLoginClick}>Get Started</Button>
+          </Col>
+          
+        </Row>
+        <Row justify="center" style={{ marginTop: '50px' }}>
+          <Col span={12} style={{ textAlign: 'center' }}>
+            <Title level={1}>Welcome to Your Personal Finance Management App</Title>
+            <Paragraph>
+              Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.
+            </Paragraph>
+            <Button type="primary" size="large" onClick={handleLoginClick}>Get Started</Button>
+          </Col>
+          
+        </Row>
+        <Row justify="center" style={{ margin: '50px 0' }}>
+          <Col span={12} style={{ textAlign: 'center' }}>
+            <Title level={1}>Welcome to Your Personal Finance Management App</Title>
+            <Paragraph>
+              Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.
+            </Paragraph>
+            <Button type="primary" size="large" onClick={handleLoginClick}>Get Started</Button>
+          </Col>
+          
+        </Row>
+    </>
+
   );
 };
 
