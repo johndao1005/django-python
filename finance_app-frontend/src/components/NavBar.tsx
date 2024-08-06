@@ -21,7 +21,7 @@ import { AuthState } from "../constants/interfaces";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-export default function NavBar() {
+export default function NavBar({props}:React.PropsWithChildren<any>) {
   const dispatch = useAppDispatch();
   const {user,loading,error} = useAppSelector((state) => state.auth as AuthState);
   const navigate = useNavigate();
@@ -72,23 +72,34 @@ export default function NavBar() {
         },
       ],
     },
-    // {
-    //   key: 'sub2',
-    //   label: 'Navigation Two',
-    //   icon: <AppstoreOutlined />,
-    //   children: [
-    //     { key: '9', label: 'Option 9' ,icon: <MailOutlined />,},
-    //     { key: '10', label: 'Option 10' },
-    //     {
-    //       key: 'sub3',
-    //       label: 'Submenu',
-    //       children: [
-    //         { key: '11', label: 'Option 11' },
-    //         { key: '12', label: 'Option 12' },
-    //       ],
-    //     },
-    //   ],
-    // },
+  ];
+
+  const publicNav: MenuItem[] = [
+    {
+      key: '1',
+      icon: <HomeOutlined  />,
+      onClick: () => navigate('/'),
+      label: 'Home'
+    },
+    {
+      key: '2',
+      icon: <PieChartOutlined />,
+      onClick: () => navigate('/privacy'),
+      label: 'Privacy'
+    },
+    {
+      key: '3',
+      icon: <ContainerOutlined />,
+      onClick: () => navigate('/terms'),
+      label: 'Terms'
+    },
+    {
+      key: '4',
+      icon: <ContainerOutlined />,
+      onClick: () => navigate('/about'),
+      label: 'About'
+    },
+    
   ];
   /* -------------------------------- Function -------------------------------- */
 
@@ -136,7 +147,7 @@ export default function NavBar() {
         defaultSelectedKeys={['1']}
         mode="inline"
         theme="dark"
-        items={items.map((item) => item)}
+        items={(props?items:publicNav).map((item) => item)}
       />
 
     </Flex>

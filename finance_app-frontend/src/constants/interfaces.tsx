@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export interface UserInterface{
     error: {
@@ -74,4 +74,12 @@ export interface AuthState {
   user: firebaseUser | null;
   loading: boolean;
   error: string | null;
+}
+
+export interface ContextType {
+  currentRoute: string;
+  navigateTo: (route: string) => void;
+}
+export interface ContextProviderProps {
+  children: ReactNode;
 }
