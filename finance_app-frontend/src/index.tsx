@@ -8,6 +8,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  // Handle theme and locales
   <React.StrictMode>
     <App />
   </React.StrictMode>
