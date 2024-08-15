@@ -37,9 +37,9 @@ export default function PublicRouter() {
           <Route path="/" element={<PublicGroup />} errorElement={<ErrorPage />}>
             <Route index element={<WelcomePage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/login" element={<LoginPage/>} />
-              <Route path="/register" element={<RegisterPage/>} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Route>
         </Routes>
       </ContextProvider>

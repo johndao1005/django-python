@@ -15,16 +15,10 @@ export const navList: NavList = [
     route: '/'
   }, {
     title: 'Terms',
-    route: '/terms'
+    route: '/about'
   }, {
     title: 'Privacy',
     route: '/privacy'
-  }, {
-    title: 'Transaction List',
-    route: '/transactions'
-  }, {
-    title: 'Investment',
-    route: '/investment'
   }]
 
 export const AppAPIList = {

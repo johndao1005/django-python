@@ -17,7 +17,7 @@ const LandingPage: React.FC = () => {
     <Layout className="layout">
       <Content style={{ padding: '0 50px' }}>
         <Row justify="center" style={{ marginTop: '50px' }}>
-          <Col span={12} style={{ textAlign: 'center' }}>
+          <Col span={12} style={{ textAlign: 'center'}}>
             <Title level={1}>Welcome to Your Personal Finance Management App</Title>
             <Paragraph>
               Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.

@@ -3,167 +3,156 @@ import React, { CSSProperties } from 'react';
 import { Button, Typography, Row, Col, Card, Collapse, CollapseProps, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  CaretRightOutlined
-} from '@ant-design/icons';
+import Features from './components/Features';
+import FAQ from './components/FAQ';
+import CTA from './components/CTA';
+import { title } from 'process';
+import Hero from './components/Hero';
+
 const { Title, Paragraph } = Typography;
 
 const WelcomePage = () => {
+  // Initialize the useNavigate hook
+  const { token } = theme.useToken();
   const navigate = useNavigate();
-
   const handleLoginClick = () => {
     navigate('/login');
   };
-
-  const CallToAction = () => {
-    return (
-      <Row justify="center" style={{ margin: '50px' }}>
-        <Col span={12} style={{ textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Title level={1}>Never think about tax again</Title>
-            <Paragraph>
-              Accountant and tax automation tool for sole traders.
-            </Paragraph>
-            <Button type="primary" size="large" onClick={handleLoginClick}>Sign Up</Button>
-          </motion.div>
-        </Col>
-      </Row>
-    )
+  
+  // CTA Details
+  const CTADetails = {
+    title:"Get started on your financial journey today",
+    description:"Finance App is the perfect platform to manage your finances. Sign up now to get started.",
+    buttonText:"Give it a try",
+    buttonFunction: handleLoginClick,
+    backgroundColor: "black"
+  }
+  // Hero Details
+  const HeroDetails = {
+    title:"Welcome to Your Personal Finance Management App",
+    description:"Manage your finances effectively and effortlessly. Track your income, expenses, and savings with our user-friendly platform.",
+    buttonText:"Get Started",
+    buttonFunction: handleLoginClick,
+    imageUrl:"/isometric-financial-analytics-1.png",
+    left2Right:true
   }
 
-
-  const Features = () => {
-    return (
-      <Row justify="center" gutter={[16, 16]}>
-        <Col span={8}>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Card title="Automatic tax calculations and payments">
-              <p>We pay your taxes, so you don't have to. Our service includes:</p>
-              <ul>
-                <li>Tax calculation</li>
-                <li>Tax payment</li>
-                <li>Tax returns</li>
-              </ul>
-              <Button type="link">Learn More</Button>
-            </Card>
-          </motion.div>
-        </Col>
-        <Col span={8}>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Card title="Full access to the app">
-              <p>Access all your financial data in one place. Features include:</p>
-              <ul>
-                <li>Income tracking</li>
-                <li>Expense tracking</li>
-                <li>Financial insights</li>
-              </ul>
-              <Button type="link">Learn More</Button>
-            </Card>
-          </motion.div>
-        </Col>
-        <Col span={8}>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Card title="We become your accountant">
-              <p>Our team of chartered accountants will:</p>
-              <ul>
-                <li>File your taxes</li>
-                <li>Answer your questions</li>
-                <li>Provide financial advice</li>
-              </ul>
-              <Button type="link">Learn More</Button>
-            </Card>
-          </motion.div>
-        </Col>
-      </Row>
-    )
+    // Hero Feature 1 Details
+  const HeroFeature1 = {
+    title: "All-in-One Financial Management",
+    description: "Manage all types of financial details including stocks, savings, and more. Our platform provides a holistic view of your finances.",
+    buttonText: "",
+    buttonFunction: handleLoginClick,
+    imageUrl: "/isometric-financial-analytics-on-stock-market.png",
+    left2Right: true
   }
-
-  const FAQ = () => {
-    const { token } = theme.useToken();
-
-    const panelStyle: React.CSSProperties = {
+  
+  // Hero Feature 2 Details
+  const HeroFeature2 = {
+    title: "AI-Driven Financial Insights",
+    description: "Integrate with AI to provide customized financial suggestions but please understand this is not financial advice.",
+    buttonText: "",
+    buttonFunction: handleLoginClick,
+    imageUrl: "/isometric-financial-robo-assistant-helping-a-man.png",
+    left2Right: false
+  }
+  
+  // Hero Feature 3 Details
+  const HeroFeature3 = {
+    title: "Simple interface",
+    description: "Say bye to complex calculation and hello to beautiful data visualisation. We do support complex calculations for you nerdy people too.",
+    buttonText: "",
+    buttonFunction: handleLoginClick,
+    imageUrl: "/isometric-statistical-data-for-financial-analysis.png",
+    left2Right: true
+  }
+  
+  // FAQ Details
+  const panelStyle: React.CSSProperties = {
       marginBottom: 24,
       background: token.colorFillAlter,
       borderRadius: token.borderRadiusLG,
       border: 'none',
     };
     // Create an array of questions and answers using Antd Collapse component
-    const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
+  const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle? ) => [
       {
         key: '1',
-        label: 'This is panel header 1',
-        children: <p>{"text"}</p>,
+        label: 'Do I need to have a finance background to use Finance App?',
+        children: <p>No you do not. The application is customised to your experience, you do not need to know it all and use of the features.</p>,
         style: panelStyle,
       },
       {
         key: '2',
-        label: 'This is panel header 2',
-        children: <p>{"text"}</p>,
+        label: 'Do you provide financial advice?',
+        children: <p>No because we are not financial instituation, so do not consider the output from financial advice</p>,
         style: panelStyle,
       },
       {
         key: '3',
-        label: 'This is panel header 3',
-        children: <p>{"text"}</p>,
+        label: 'Do you store my financial data?',
+        children: <p>That data is encrypted and stored in a cloud platform as we need to do some data calculation but we are happy to remove it if you submit a request</p>,
         style: panelStyle,
       },
     ];
-    return (
-      <Row justify="center" style={{  margin: '50px'  }}>
-        <Col span={12}>
-        <Title level={2}>FAQs</Title>
-          <Collapse
-            bordered={false}
-            defaultActiveKey={['1']}
-            expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-            style={{ backgroundColor:"transparent" }}
-            items={getItems(panelStyle)}
-          />
-        </Col>
-      </Row>
-    )
-  }
+    // Feature Details
+    const FeatureDetails = [
+      {
+        title: "Real-time Analytics",
+        description: (
+          <div>
+            <p>Get insights and analytics in real-time to make informed decisions.</p>
+            <ul>
+              <li>Live data updates</li>
+              <li>Customizable dashboards</li>
+              <li>Detailed reports</li>
+            </ul>
+          </div>
+        ),
+        icon: "analytics_icon",
+        buttonText: "View Analytics",
+      },
+      {
+        title: "Secure Transactions",
+        description: (
+          <div>
+            <p>Experience secure and fast transactions with our advanced security protocols.</p>
+            <ul>
+              <li>End-to-end encryption</li>
+              <li>Multi-factor authentication</li>
+              <li>Fraud detection</li>
+            </ul>
+          </div>
+        ),
+        icon: "security_icon",
+        buttonText: "Secure Now",
+      },
+      {
+        title: "User Management",
+        description: (
+          <div>
+            <p>Manage user accounts and permissions with ease.</p>
+            <ul>
+              <li>Role-based access control</li>
+              <li>Activity logs</li>
+              <li>Easy onboarding</li>
+            </ul>
+          </div>
+        ),
+        icon: "user_management_icon",
+        buttonText: "Manage Users",
+      },
+    ];
 
-  const TopHero = () => {
- //Hero section divided in half, one side displays text and button and the other side displays an image
-    return (
-      <Row justify="center" style={{ margin: '50px' ,display:"flex", justifyContent:"space-between"}}>
-            <Col span={12} style={{ textAlign: 'center', margin:"auto" }}>
-              <Title level={1}>Get started today</Title>
-              <Paragraph>
-                Sign up for an account and start <br/>managing your finances effortlessly.
-              </Paragraph>
-              <Button type="primary" size="large" onClick={handleLoginClick}>Sign Up</Button>
-            </Col>
-            <Col span={12}>
-              <img src="https://via.placeholder.com/400" alt="placeholder" style={{ width: '100%', height: 'auto' }} />
-            </Col>        
-      </Row>
-    )
- 
-  }
   return (
     <>
-      <TopHero />
-      <Features />
-      <FAQ />
-      <CallToAction/>
+      <Hero {...HeroDetails} />
+      <Features details={FeatureDetails}/>
+      <Hero {...HeroFeature1} />
+      <Hero {...HeroFeature2} />
+      <Hero {...HeroFeature3} />
+      <CTA {...CTADetails}/>
+      <FAQ getItems={getItems} panelStyle={panelStyle} />
     </>
 
   );
