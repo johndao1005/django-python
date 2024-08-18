@@ -10,7 +10,7 @@ import {
   LOGIN_FAILED,
   LOGOUT_SUCCESS,
 } from '../constants/string';
-import { mapUserCredentialToFirebaseUser } from '../ulti/firebaseUserMapper';
+import { mapUserCredentialToFirebaseUser } from '../ultis/firebaseUserMapper';
 import { locale } from 'moment';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 

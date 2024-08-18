@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, useAppDispatch, useAppSelector } from '../../hook/initial';
 import { RootState } from '../../store';
-import { mapUserCredentialToFirebaseUser } from '../../ulti/firebaseUserMapper'
+import { mapUserCredentialToFirebaseUser } from '../../ultis/firebaseUserMapper'
 import {  useNavigate } from 'react-router-dom';
 import { Button, Card, Checkbox, Flex,Form, Input } from 'antd';
 import { firebaseLogin, firebaseRegister } from '../../store/login.action';
