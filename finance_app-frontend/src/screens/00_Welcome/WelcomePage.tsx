@@ -1,6 +1,6 @@
 // src/components/LandingPage.tsx
 import React, { CSSProperties } from 'react';
-import { Button, Typography, Row, Col, Card, Collapse, CollapseProps, theme } from 'antd';
+import { Button, Typography, Row, Col, Card, Collapse, CollapseProps, theme, Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Features from './components/Features';
@@ -34,14 +34,14 @@ const WelcomePage = () => {
     buttonText:"Get Started",
     buttonFunction: handleLoginClick,
     imageUrl:"/isometric-financial-analytics-1.png",
-    left2Right:true
+    left2Right: false
   }
 
     // Hero Feature 1 Details
   const HeroFeature1 = {
     title: "All-in-One Financial Management",
     description: "Manage all types of financial details including stocks, savings, and more. Our platform provides a holistic view of your finances.",
-    buttonText: "",
+    buttonText: null,
     buttonFunction: handleLoginClick,
     imageUrl: "/isometric-financial-analytics-on-stock-market.png",
     left2Right: true
@@ -51,7 +51,7 @@ const WelcomePage = () => {
   const HeroFeature2 = {
     title: "AI-Driven Financial Insights",
     description: "Integrate with AI to provide customized financial suggestions but please understand this is not financial advice.",
-    buttonText: "",
+    buttonText: null,
     buttonFunction: handleLoginClick,
     imageUrl: "/isometric-financial-robo-assistant-helping-a-man.png",
     left2Right: false
@@ -61,7 +61,7 @@ const WelcomePage = () => {
   const HeroFeature3 = {
     title: "Simple interface",
     description: "Say bye to complex calculation and hello to beautiful data visualisation. We do support complex calculations for you nerdy people too.",
-    buttonText: "",
+    buttonText: null,
     buttonFunction: handleLoginClick,
     imageUrl: "/isometric-statistical-data-for-financial-analysis.png",
     left2Right: true

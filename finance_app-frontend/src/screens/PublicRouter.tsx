@@ -1,5 +1,4 @@
 import { Layout } from "antd";
-import { useState } from "react";
 import SiteHeader from "../components/SiteHeader";
 import { Content } from "antd/es/layout/layout";
 import { Outlet, Route, BrowserRouter as Router, Routes } from "react-router-dom";
@@ -13,11 +12,15 @@ import PrivacyPage from "./00_Welcome/PrivacyPage";
 import AboutPage from "./00_Welcome/AboutPage";
 
 const PublicGroup = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileView, setMobileView] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+/* --------------------------------- State and Functions --------------------------------- */
+  //TODO add a function to toggle the collapsed state when on mobile view
+  // const [collapsed, setCollapsed] = useState(false);
+  // const [mobileView, setMobileView] = useState(false);
+  // const toggleCollapsed = () => {
+  //   setCollapsed(!collapsed);
+  // };
+
+/* --------------------------------- Main --------------------------------- */
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <SiteHeader />

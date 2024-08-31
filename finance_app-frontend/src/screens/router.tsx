@@ -8,18 +8,18 @@ import PublicRouter from "./PublicRouter";
 import AppRouter from "./AppRouter";
 
 /* --------------------------------- Context -------------------------------- */
-
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
-
-  const navigate = useNavigate();
+/* --------------------------------- States and Functions -------------------------------- */
   const [currentRoute, setCurrentRoute] = useState<string>('/');
+  // Function to navigate to a different route
+  const navigate = useNavigate();
   const navigateTo = (route: string) => {
     setCurrentRoute(route);
     navigate(route);
   };
-
+/* --------------------------------- Main -------------------------------- */
   return (
     <Context.Provider value={{ currentRoute, navigateTo }}>
       {children}
@@ -29,8 +29,9 @@ export const ContextProvider: FC<ContextProviderProps> = ({ children }) => {
 
 
 const MainRouter = () => {
+  // Get the user from the store then render the appropriate router
   const { user } = useAppSelector((state) => state.auth as AuthState);
-  if(!user)return PublicRouter();
+  if(!user) return PublicRouter();
   return AppRouter();
 }
 

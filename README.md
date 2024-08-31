@@ -51,3 +51,12 @@ py manage.py runserver
 
 
 ## Frontend
+
+Suggestions for further improvement:
+
+- Error Handling: Consider how to handle cases where the auth state might be in an loading or error state.
+- Redirect Logic: You might want to add logic to redirect to a specific page after login (e.g., the last attempted page).
+- Logout Functionality: Ensure there's a mechanism to log out and redirect to the public area.
+- Route Guards: While the FunctionGroup component acts as a guard, consider implementing more granular route guards if different routes require different levels of authentication or permissions.
+- Loading State: Add a loading state while checking for authentication to improve user experience.
+- Type Safety: Ensure you're using TypeScript effectively throughout, especially for state and props.

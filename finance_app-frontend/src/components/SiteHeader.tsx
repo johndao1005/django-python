@@ -9,11 +9,7 @@ import {
   PieChartOutlined,
   HomeOutlined
 } from '@ant-design/icons';
-import { auth, useAppDispatch, useAppSelector } from '../hook/initial';
 import type { MenuProps } from 'antd';
-import { RootState } from "../store";
-import { firebaseLogout } from "../store/login.action";
-import { AuthState } from "../constants/interfaces";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -22,6 +18,12 @@ export default function SiteHeader({ props }: React.PropsWithChildren<any>) {
   const items: MenuItem[] = [
     {
       key: '1',
+      icon: <HomeOutlined />,
+      onClick: () => navigate('/'),
+      label: 'Home'
+    },
+    {
+      key: '2',
       icon: <PieChartOutlined />,
       onClick: () => navigate('/privacy'),
       label: 'Privacy'

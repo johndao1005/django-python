@@ -11,7 +11,7 @@ export default function CTA(props: {title: string, description: string, buttonTe
         buttonFunction()
     }
     return (
-      <Row  justify="center" style={{ margin: '10px 0', padding : "20px", color: 'white', backgroundColor: backgroundColor ,width: "100vw"}}>
+      <Row  justify="center" style={{ margin: '10px 0', padding : "60px", color: 'white', backgroundColor: backgroundColor ,width: "100vw"}}>
         <Col span={18} style={{ textAlign: 'center' }}>
           <motion.div
             initial={{ opacity: 0, y: -50 }}
