@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Checkbox, Form, Input, Card, Flex, Tabs ,FormListFieldData} from "antd";
+import { AuthState } from "../../constants/interfaces";
+import { useAppDispatch, useAppSelector } from "../../hook/initial";
+import { firebaseLogin, firebaseRegister } from "../../store/login.action";
+import { confirmPasswordValidator, evaluatePasswordStrength, getPasswordStrengthColor, getPasswordStrengthText, passwordValidator } from "../../ultis/passwordCheck";
 
 //Define the type of the form field
 type FieldType = {
@@ -12,131 +16,99 @@ type FieldType = {
 
 //create a login page with React component
 export default function LoginPage() {
-  /* --------------------------------- UseState ------------------------------- */
+  /* --------------------------------- Variable ------------------------------- */
   //const { user, login, logout } = useAuth();
   const navigate = useNavigate();
   const [formHasErrors, setFormHasErrors] = useState(true);
-  const onFinish = (values: FieldType) => { }
-  const onFinishFailed = (errorInfo: any) => { }
-  // const onFieldsChange = (changedFields: Form.Item[], allFields: FormListFieldData[]) => {
-  //   setFormHasErrors(allFields.some(field => field.f.length > 0));
-  // };
+  const {user,loading,error} = useAppSelector((state) => state.auth as AuthState);
+  const dispatch = useAppDispatch();
+  const [passwordStrength, setPasswordStrength] = useState(0);
+  const [loginForm] = Form.useForm();
+  const [registerForm] = Form.useForm();
+  const [passwordValue, setPasswordValue] = useState("");
+  /* --------------------------------- Action ------------------------------- */
 
+  const onFinishLogin = (values: FieldType) => {
+    dispatch(firebaseLogin({  user: { email: values.username, password: values.password }}));
+  };
 
-  /* -------------------------------- Component ------------------------------- */
+  const onFinishRegister = (values: FieldType) => {
+    dispatch(firebaseRegister({ user: { email: values.username, password: values.password } }));
+  };
 
-  const loginForm = <Form
-    name="login"
-    labelCol={{ span: 24 }}
-    wrapperCol={{ span: 24 }}
-    style={{ maxWidth: 600 }}
-    initialValues={{ remember: true,test: "test"}}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    autoComplete="off"
-  >
-    <Form.Item<FieldType>
-      label="Username"
-      name="username"
-      rules={[{ required: true, message: 'Please input your username!' }]}
-    >
-      <Input />
-    </Form.Item>
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
 
-    <Form.Item<FieldType>
-      label="Password"
-      name="password"
-      rules={[
-        { required: true, message: 'Please input your password!' },
-        { pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$/, message: 'Password must be 12 characters long, include an uppercase letter, a number, and a special character.' }
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-    <Form.Item<FieldType>
-      name="remember"
-      valuePropName="checked"
-      wrapperCol={{ offset: 8, span: 16 }}
-    >
-      <Checkbox>Remember me</Checkbox>
-    </Form.Item>
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
+  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setPasswordValue(value);
+    const strength = evaluatePasswordStrength(value);
+    setPasswordStrength(strength);
+  }, []);
 
-  const registerForm = <Form
-    name="register"
-    labelCol={{ span: 24 }}
-    wrapperCol={{ span: 24 }}
-    style={{ maxWidth: 600 }}
-    initialValues={{ remember: true , test: "test"}}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
-    
-    //TODO need to update to check for error
-    // onFieldsChange={onFieldsChange}
-    scrollToFirstError
-  >
-    <Form.Item<FieldType>
-      label="Username"
-      name="username"
-      rules={[{ required: true, message: 'Please input your username' }]}
-    >
-      <Input />
-    </Form.Item>
+  
 
-    <Form.Item<FieldType>
-      label="Password"
-      name="password"
-      rules={[
-        { required: true, message: 'Please input your password!' },
-        { pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$/, message: 'Password must be 12 characters long, include an uppercase letter, a number, and a special character.' }
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-    <Form.Item<FieldType>
-      label="Confirm Password"
-      name="confirmPassword"
-      rules={[
-        { required: true, message: 'Please check your password!' },
-        ({ getFieldValue }) => ({
-          validator(_, value) {
-            if (!value || getFieldValue('password') === value) {
-              return Promise.resolve();
-            }
-            return Promise.reject(new Error('The two passwords that you entered do not match!'));
-          },
-        }),
-      ]}
-    >
-      <Input.Password />
-    </Form.Item>
-    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-      <Button type="primary" htmlType="submit" disabled={formHasErrors}>
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
+  const loginFormComponent = (
+    <Form form={loginForm} onFinish={onFinishLogin} onFinishFailed={onFinishFailed}>
+      <Form.Item name="username" rules={[{ type: 'email', required: true, message: 'Please input a valid email!' }]}>
+        <Input placeholder="Email" />
+      </Form.Item>
+      <Form.Item name="password" rules={[{ required: true, validator: passwordValidator }]}>
+        <Input.Password placeholder="Password" onChange={handlePasswordChange} />
+      </Form.Item>
+      {passwordValue && (
+        <div style={{ color: getPasswordStrengthColor(passwordStrength) }}>
+          Password Strength: {getPasswordStrengthText(passwordStrength)}
+        </div>
+      )}
+      <Form.Item>
+        <Button type="primary" htmlType="submit" >
+          Sign In
+        </Button>
+      </Form.Item>
+    </Form>
+  );
 
-  /* ---------------------------------- Main ---------------------------------- */
+  const registerFormComponent = (
+    <Form form={registerForm} onFinish={onFinishRegister} onFinishFailed={onFinishFailed} >
+      <Form.Item name="username" rules={[{ type: 'email', required: true, message: 'Please input a valid email!' }]}>
+        <Input placeholder="Email" />
+      </Form.Item>
+      <Form.Item name="password" rules={[{ required: true, validator: passwordValidator }]}>
+        <Input.Password placeholder="Password" onChange={handlePasswordChange} />
+      </Form.Item>
+      {passwordValue && (
+        <div style={{ color: getPasswordStrengthColor(passwordStrength) }}>
+          Password Strength: {getPasswordStrengthText(passwordStrength)}
+        </div>
+      )}
+      <Form.Item name="confirmPassword" dependencies={['password']} rules={[
+        { required: true, message: 'Please confirm your password!' },
+        confirmPasswordValidator(registerForm.getFieldValue),
+      ]}>
+        <Input.Password placeholder="Confirm Password" />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit" >
+          Sign Up
+        </Button>
+      </Form.Item>
+    </Form>
+  );
 
   return (
     <Flex vertical align="center" justify="center" style={{ height: "100vh" }}>
       <Card>
         <Tabs defaultActiveKey="1" style={{ width: "70vh", alignItems: "center" }}>
           <Tabs.TabPane tab="Sign In" key="1">
-            {loginForm}
+            {loginFormComponent}
           </Tabs.TabPane>
           <Tabs.TabPane tab="Sign Up" key="2">
-            {registerForm}
+            {registerFormComponent}
           </Tabs.TabPane>
         </Tabs>
       </Card>
     </Flex>
-  )
-
+  );
 }
